@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBSE Results to Excel Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>CBSE Results to Excel Converter</h1>
+    <div class="upload-area" id="uploadArea">
+        <div class="upload-icon">📁</div>
+        <p>Drag & Drop your file here</p>
+        <p>or</p>
+        <input type="file" id="fileInput" accept=".txt" hidden>
+        <label for="fileInput" class="custom-file-upload">Choose File</label>
+        <p id="fileName">No file chosen</p>
+    </div>
+
+    <button onclick="uploadFile()">Process and Download Excel</button>
+
+    <div id="message"></div>
+
+    <!-- Spinner -->
+    <div id="spinner" style="display: none;">
+        <div class="loader"></div>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileName = document.getElementById('fileName');
+        const spinner = document.getElementById('spinner');
+        fileInput.addEventListener('click', function () {
+        spinner.style.display = 'block';
+    });
+        // When file selected manually
+        fileInput.addEventListener('change', function () {
+            if (fileInput.files.length > 0) {
+                fileName.textContent = fileInput.files[0].name;
+            } else {
+                fileName.textContent = 'No file chosen';
+            }
+        });
+
+        // Drag & Drop Support
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files; // Assign dropped files
+                fileName.textContent = files[0].name;
+            }
+        });
+
+        async function uploadFile() {
+            const messageDiv = document.getElementById('message');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                messageDiv.textContent = 'Please select a .txt file.';
+                return;
+            }
+
+            messageDiv.textContent = '';
+            spinner.style.display = 'block'; // Show spinner
+
+            const backendURL = 'https://txt2excelbackend.onrender.com/process-file'; // Your backend URL
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch(backendURL, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'cbse_results.xlsx';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                    messageDiv.textContent = 'Excel file downloaded successfully!';
+                } else {
+                    const errorText = await response.text();
+                    messageDiv.textContent = `Error processing file: ${errorText}`;
+                }
+            } catch (error) {
+                messageDiv.textContent = `Network error: ${error.message}`;
+            } finally {
+                spinner.style.display = 'none'; // Hide spinner after upload completes or fails
+            }
+        }
+    </script>
+
+
+
+</body>
+</html>

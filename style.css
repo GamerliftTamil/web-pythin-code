@@ -1,0 +1,105 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(to bottom, #f12711, #f5af19);
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
+h1 {
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    margin-bottom: 30px;
+}
+
+.upload-area {
+    background: white;
+    border: 2px dashed #ccc;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    transition: background 0.3s, border-color 0.3s;
+    margin-bottom: 20px;
+}
+
+.upload-area.dragover {
+    background: #e8f0fe;
+    border-color: #4a90e2;
+}
+
+.upload-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+    color: #4a90e2;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 25px;
+    cursor: pointer;
+    background-color: #4a90e2;
+    color: white;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.custom-file-upload:hover {
+    background-color: #357ABD;
+}
+
+#fileName {
+    margin-top: 10px;
+    font-style: italic;
+    color: #555;
+}
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+
+button {
+    padding: 12px 30px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#message {
+    margin-top: 20px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
