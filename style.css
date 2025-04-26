@@ -5,9 +5,10 @@ html, body {
 }
 
 body {
-    background: linear-gradient(to bottom, #f12711, #f5af19);
-    background-size: cover;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: linear-gradient(to bottom, red, rgb(243, 98, 122));
+    background-repeat: no-repeat;
+    background-size: auto;
+    font-family: sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,48 +17,74 @@ body {
 
 h1 {
     color: white;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    text-shadow: 2px 2px 4px black;
     margin-bottom: 30px;
 }
 
+.loader {
+    border: 6px solid #f3f3f3; 
+    border-top: 6px solid #3498db; 
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 50s linear infinite;
+    margin: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
 .upload-area {
-    background: white;
-    border: 2px dashed #ccc;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-bottom: 20px;
+    border: 2px solid #ffffff; /* Changed border style for better visual cue */
+    padding: 40px; /* Increased padding for a larger drop area */
     border-radius: 10px;
-    width: 300px;
-    text-align: center;
-    transition: background 0.3s, border-color 0.3s;
     margin-bottom: 20px;
+    padding: 100px;
+    
+    text-align: center;
+    background: rgba(247, 247, 247, 0.9);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer; 
 }
 
 .upload-area.dragover {
-    background: #e8f0fe;
-    border-color: #4a90e2;
+    background-color: #e0e0e0; /* Change background color when dragging over */
+    border-color: #555;
 }
 
 .upload-icon {
-    font-size: 50px;
+    font-size: 2em;
     margin-bottom: 10px;
-    color: #4a90e2;
+}
+
+input[type="file"] {
+    display: none;
 }
 
 .custom-file-upload {
     display: inline-block;
-    margin-top: 10px;
-    padding: 10px 25px;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
     cursor: pointer;
-    background-color: #4a90e2;
-    color: white;
-    border-radius: 25px;
+    background-color: #007bff;
+    color: rgb(253, 247, 247);
+    border-radius: 5px;
     font-size: 16px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
 }
 
 .custom-file-upload:hover {
-    background-color: #357ABD;
+    background-color: #0056b3;
 }
 
 #fileName {
@@ -65,36 +92,21 @@ h1 {
     font-style: italic;
     color: #555;
 }
-.loader {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite;
-    margin: 20px auto;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
 
 button {
-    padding: 12px 30px;
+    padding: 10px 20px;
     background-color: #28a745;
     color: white;
     border: none;
-    border-radius: 30px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
     transition: background-color 0.3s ease;
     margin-top: 20px;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #1e7e34;
 }
 
 #message {
